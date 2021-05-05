@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from '../Header/Header.js';
 import '../Home/Homepage.css'
+
 function HomeComponent(){
     return(
-        <div class="box-center">
+        <div className="box-center">
             <Header />
         </div>
     )

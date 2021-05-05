@@ -1,20 +1,60 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import PhoneIcon from '@material-ui/icons/Phone';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 
-const useStyles = makeStyles({
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+
+import User from '../User/Userdata'
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`scrollable-force-tabpanel-${index}`}
+      aria-labelledby={`scrollable-force-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-force-tab-${index}`,
+    'aria-controls': `scrollable-force-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 500,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
   },
-});
+}));
 
-export default function IconTabs() {
+export default function ScrollableTabsButtonForce() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -23,19 +63,31 @@ export default function IconTabs() {
   };
 
   return (
-    <Paper square className={classes.root}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        indicatorColor="primary"
-        textColor="primary"
-        aria-label="icon tabs example"
-      >
-        <Tab icon={<PersonPinIcon />} aria-label="person"  label="User"  />
-        <Tab icon={<AssignmentIcon />} aria-label="assignment" label="Posts"/>
-        <Tab icon={<AddBoxIcon />} aria-label="box" label="Add Post"/>
-      </Tabs>
-    </Paper>
+    <div className={classes.root}>
+      <AppBar position="static" color="default">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="on"
+          indicatorColor="primary"
+          textColor="primary"
+          aria-label="scrollable force tabs example"
+        >
+          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
+          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
+          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
+        </Tabs>
+      </AppBar>
+      <TabPanel value={value} index={0}>
+        <User/>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+    </div>
   );
 }
