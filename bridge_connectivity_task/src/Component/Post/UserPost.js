@@ -20,15 +20,12 @@ const useStyles = makeStyles({
 
 export default function UserPost(props) {
   const classes = useStyles();
-  const allUser=props.allUsers
   const url ="https://jsonplaceholder.typicode.com/posts";
     const [data, setData]=useState([]);
-    const [mainData, setMainData]=useState([]);
     const getpost = () =>{
       fetch(url)
         .then((res) => {
           res.json().then((resp)=>{
-            console.log(resp)
             setData([...resp])
           }) 
           })
@@ -45,20 +42,13 @@ export default function UserPost(props) {
       }
     });
   }
-  function details(us,postdata){
-    const emptyArray =[];
-    for(var i=0;i<postdata.length;i++){
-      console.log(us[i],'user')
-      console.log(postdata[i],'post')
-      if(postdata[i]===us[i]){
-        emptyArray.push(postdata[i])
-        console.log(us[i])
-      }
-      return ''
-    }
-  }
-  console.log(allUser,'user')
-  console.log(details(props.allUsers,data))
+  // function details(us,postdata,emptyArray){
+  //   for(var i=1;i<=10;i++){
+  //     const result = postdata.find( ({ userId }) => us[userId] === postdata[i] );
+  //     emptyArray.push(result)
+  //   }
+  //   return emptyArray
+  // }
   return (
     <TableContainer component={Paper}>
             <h1 align="center" className="spacing textTransform">Posts</h1>
@@ -70,6 +60,7 @@ export default function UserPost(props) {
                 <TableCell align="center" className="paraSpacing textTransform">Title</TableCell>
                 <TableCell align="center" className="paraSpacing textTransform">Body</TableCell>
                 <TableCell align="center" className="paraSpacing textTransform">Delete</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">Edit</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -85,8 +76,11 @@ export default function UserPost(props) {
                     {item.body}
                   </TableCell>
                   <TableCell component="th" className="tableHead" scope="row" align="center">
-                  <Button variant="contained" color="primary" onClick={()=>deleteUser(item.id)}>Delete</Button>
-                  </TableCell>                  
+                  <Button variant="contained" color="secondary" onClick={()=>deleteUser(item.id)}>Delete</Button>
+                  </TableCell> 
+                  <TableCell component="th" className="tableHead" scope="row" align="center">
+                  <Button variant="contained" color="primary">Edit</Button>
+                  </TableCell>                   
                 </TableRow>
               ))}
             </TableBody>
