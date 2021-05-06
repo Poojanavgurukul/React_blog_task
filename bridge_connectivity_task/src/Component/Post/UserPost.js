@@ -18,34 +18,53 @@ const useStyles = makeStyles({
 });
 
 
-export default function UserPost() {
+export default function UserPost(props) {
   const classes = useStyles();
+  const allUser=props.allUsers
   const url ="https://jsonplaceholder.typicode.com/posts";
-    const [data, setData]=useState();
-    const getpost = () =>
+    const [data, setData]=useState([]);
+    const [mainData, setMainData]=useState([]);
+    const getpost = () =>{
       fetch(url)
-        .then((res) => res.json())
-  
+        .then((res) => {
+          res.json().then((resp)=>{
+            console.log(resp)
+            setData([...resp])
+          }) 
+          })
+    }
     useEffect(() => {
-      getpost().then((data) => setData(data))
+      getpost();
     }, [])
   function deleteUser(id){
     fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
       method: 'DELETE',
     }).then((result)=>{
-      result.json().then((resp)=>{
-        console.log(resp)
-        getpost();
-      })
+      if(result.status===200){
+        getpost()
+      }
     });
   }
+  function details(us,postdata){
+    const emptyArray =[];
+    for(var i=0;i<postdata.length;i++){
+      console.log(us[i],'user')
+      console.log(postdata[i],'post')
+      if(postdata[i]===us[i]){
+        emptyArray.push(postdata[i])
+        console.log(us[i])
+      }
+      return ''
+    }
+  }
+  console.log(allUser,'user')
+  console.log(details(props.allUsers,data))
   return (
     <TableContainer component={Paper}>
             <h1 align="center" className="spacing textTransform">Posts</h1>
             <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                {console.log(data)}
                 <TableCell align="center" className="paraSpacing textTransform">UserName</TableCell>
                 <TableCell align="center" className="paraSpacing textTransform">Post Id</TableCell>
                 <TableCell align="center" className="paraSpacing textTransform">Title</TableCell>
@@ -55,15 +74,10 @@ export default function UserPost() {
             </TableHead>
             <TableBody>
               {data?.map((item,index) => (
-                <TableRow key={index} align="center">
-                   <TableCell component="th" className="tableHead" scope="row">
-                  </TableCell>
+                <TableRow key={index} align="center"> 
                   <TableCell component="th" className="tableHead" scope="row">
                     {item.id}
                   </TableCell>
-                  {/*<TableCell component="th" className="tableHead" scope="row" align="center">
-                    {item.username}
-                  </TableCell>*/}
                   <TableCell component="th" className="tableHead" scope="row" align="center">
                     {item.title}
                   </TableCell>
@@ -72,8 +86,7 @@ export default function UserPost() {
                   </TableCell>
                   <TableCell component="th" className="tableHead" scope="row" align="center">
                   <Button variant="contained" color="primary" onClick={()=>deleteUser(item.id)}>Delete</Button>
-                  </TableCell>
-                  
+                  </TableCell>                  
                 </TableRow>
               ))}
             </TableBody>

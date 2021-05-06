@@ -15,19 +15,8 @@ const useStyles = makeStyles({
   },
 });
 
-
-export default function UserData() {
+export default function UserData(props) {
   const classes = useStyles();
-  const url ="https://jsonplaceholder.typicode.com/users";
-    const [data, setData]=useState();
-    const getuser = () =>
-      fetch(url)
-        .then((res) => res.json())
-  
-    useEffect(() => {
-      getuser().then((data) => setData(data))
-    }, [])
-
   return (
     <TableContainer component={Paper}>
             <h1 align="center" className="spacing textTransform">User</h1>
@@ -35,7 +24,6 @@ export default function UserData() {
             <TableHead>
               <TableRow>
                 <TableCell align="center" className="paraSpacing textTransform">Id</TableCell>
-                {console.log(data)}
                 <TableCell  align="center" className="paraSpacing textTransform">Name</TableCell>
                 <TableCell  align="center" className="paraSpacing textTransform">UserName</TableCell>
                 <TableCell  align="center" className="paraSpacing textTransform">Email</TableCell>
@@ -44,7 +32,7 @@ export default function UserData() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {data?.map((item,index) => (
+              {props.allUsers?.map((item,index) => (
                 <TableRow key={index} align="center">
                   <TableCell component="th" className="tableHead" scope="row">
                     {item.id}
