@@ -7,11 +7,11 @@ import Tab from '@material-ui/core/Tab';
 import PhoneIcon from '@material-ui/icons/Phone';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
-
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-
-import User from '../User/Userdata'
+import User from '../User/Userdata.js';
+import Post from '../Post/UserPost.js';
+import AddPostForm from '../Post/AddPost.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,13 +80,13 @@ export default function ScrollableTabsButtonForce() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <User/>
+        <User />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Post />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <AddPostForm />
       </TabPanel>
     </div>
   );
