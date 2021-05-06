@@ -4,8 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import PersonPinIcon from '@material-ui/icons/PersonPin';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -74,9 +74,9 @@ export default function ScrollableTabsButtonForce() {
           textColor="primary"
           aria-label="scrollable force tabs example"
         >
-          <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
-          <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
-          <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
+          <Tab label="Users" icon={<PersonPinIcon />} {...a11yProps(0)} />
+          <Tab label="Posts" icon={<AssignmentIcon />} {...a11yProps(1)} />
+          <Tab label="Add Posts" icon={<AddBoxIcon />} {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

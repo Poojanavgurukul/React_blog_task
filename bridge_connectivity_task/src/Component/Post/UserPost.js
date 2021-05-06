@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import '../Post/Post.css';
+
 
 const useStyles = makeStyles({
   table: {
@@ -39,35 +41,36 @@ export default function UserPost() {
   }
   return (
     <TableContainer component={Paper}>
+            <h1 align="center" className="spacing textTransform">Posts</h1>
             <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 {console.log(data)}
-                <TableCell align="center">UserName</TableCell>
-                <TableCell align="center">Post Id</TableCell>
-                <TableCell align="center">Title</TableCell>
-                <TableCell align="center">Body</TableCell>
-                <TableCell align="center">Delete</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">UserName</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">Post Id</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">Title</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">Body</TableCell>
+                <TableCell align="center" className="paraSpacing textTransform">Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {data?.map((item,index) => (
                 <TableRow key={index} align="center">
-                   <TableCell component="th" scope="row">
+                   <TableCell component="th" className="tableHead" scope="row">
                   </TableCell>
-                  <TableCell component="th" scope="row">
+                  <TableCell component="th" className="tableHead" scope="row">
                     {item.id}
                   </TableCell>
-                  {/*<TableCell component="th" scope="row" align="center">
+                  {/*<TableCell component="th" className="tableHead" scope="row" align="center">
                     {item.username}
                   </TableCell>*/}
-                  <TableCell component="th" scope="row" align="center">
+                  <TableCell component="th" className="tableHead" scope="row" align="center">
                     {item.title}
                   </TableCell>
-                  <TableCell component="th" scope="row" align="center">
+                  <TableCell component="th" className="tableHead" scope="row" align="center">
                     {item.body}
                   </TableCell>
-                  <TableCell component="th" scope="row" align="center">
+                  <TableCell component="th" className="tableHead" scope="row" align="center">
                   <Button variant="contained" color="primary" onClick={()=>deleteUser(item.id)}>Delete</Button>
                   </TableCell>
                   

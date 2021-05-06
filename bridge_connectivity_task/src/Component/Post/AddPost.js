@@ -5,8 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { Alert, AlertTitle } from '@material-ui/lab';
-
-
+import '../Post/Post.css';
 const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
@@ -62,9 +61,10 @@ export default function AddPostForm(){
     
     return (
         <div>
+            <h1 align="center" className="spacing textTransform">Add Your Post</h1>
             <form onSubmit={submitHandler}>
             <div className={classes.margin}>
-            <InputLabel htmlFor="input-with-icon-adornment">userId</InputLabel>
+            <InputLabel htmlFor="input-with-icon-adornment" className="paraSpacing tableHead">userId</InputLabel>
                 <Input
                 id="input-with-icon-adornment"
                 type="text"
@@ -78,7 +78,7 @@ export default function AddPostForm(){
                 />
             </div>
             <div className={classes.margin}>
-             <InputLabel htmlFor="input-with-icon-adornment">Title</InputLabel>
+             <InputLabel htmlFor="input-with-icon-adornment" className="paraSpacing tableHead">Title</InputLabel>
                 <Input
                 id="input-with-icon-adornment"
                 type="text"
@@ -92,7 +92,7 @@ export default function AddPostForm(){
                 />
                 </div>
                 <div className={classes.margin}>
-                <InputLabel htmlFor="input-with-icon-adornment">Body</InputLabel>
+                <InputLabel htmlFor="input-with-icon-adornment" className="paraSpacing tableHead">Body</InputLabel>
                 <Input
                 id="input-with-icon-adornment"
                 type="text"
